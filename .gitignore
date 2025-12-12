@@ -13,6 +13,8 @@ client/dist/
 .env.development.local
 .env.test.local
 .env.production.local
+server/.env
+client/.env
 
 # Logs
 npm-debug.log*
@@ -61,4 +63,5 @@ coverage/
 # Package manager locks (optional - some prefer to commit these)
 # package-lock.json
 # yarn.lock
+
 

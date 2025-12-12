@@ -1,5 +1,6 @@
+require('dotenv').config();
 const express = require('express')
-const port = 3001
+const port = process.env.PORT || 3001
 const app = express()
 const mysql = require('mysql')
 const multer = require('multer')
@@ -11,11 +12,11 @@ app.use(express.json());
 
 
 const conn=mysql.createConnection({
-    host: 'localhost',
-    port: '3306',
-    database: 'internship_mca',
-    user: 'root',
-    password: ''
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || '3306',
+    database: process.env.DB_NAME || 'internship_mca',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || ''
 
 })
 
@@ -440,16 +441,16 @@ app.post('/forgotpass',(req,res) => {
             console.log(err);}
         else{
             let transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
-                port: 587,
+                host: process.env.EMAIL_HOST || "smtp.gmail.com",
+                port: process.env.EMAIL_PORT || 587,
                 auth: {
-                  user: "ashishpoojary33@gmail.com",
-                  pass: "lxinugiwslpwokeq",
+                  user: process.env.EMAIL_USER,
+                  pass: process.env.EMAIL_PASS,
                 },
               });
             
               transporter.sendMail({
-                from: '"Ecommerce" <ashishpoojary33@gmail.com>',
+                from: `"Ecommerce" <${process.env.EMAIL_USER}>`,
                 to: username,
                 subject: "ONE TIME PASSWORD",
                 text: "Your OTP:",

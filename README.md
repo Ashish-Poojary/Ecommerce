@@ -57,18 +57,7 @@ Ecommerce is a full-stack web-based online shopping platform that provides a com
    CREATE DATABASE internship_mca;
    ```
 
-2. Update database credentials in `server/index.js`:
-   ```javascript
-   const conn = mysql.createConnection({
-       host: 'localhost',
-       port: '3306',
-       database: 'internship_mca',
-       user: 'root',
-       password: 'your_password'
-   });
-   ```
-
-3. Import the database schema (create tables manually or use phpMyAdmin):
+2. Import the database schema (create tables manually or use phpMyAdmin):
    - `signup` - User registration data
    - `login` - User authentication
    - `products` - Product information
@@ -78,32 +67,40 @@ Ecommerce is a full-stack web-based online shopping platform that provides a com
    - `feedback` - Customer feedback
    - `otp` - OTP verification
 
-### Configure Email Settings
+### Configure Environment Variables
 
-Update email configuration in `server/index.js`:
-```javascript
-let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    auth: {
-      user: "your_email@gmail.com",
-      pass: "your_app_password",
-    },
-});
-```
+**IMPORTANT**: Never commit `.env` files to version control. They contain sensitive credentials.
 
-**Note**: For Gmail, you need to generate an App Password from your Google Account settings.
+1. **Server Configuration** (`server/.env`):
+   - Copy `server/.env.example` to `server/.env`
+   - Update the values with your actual credentials:
+   ```env
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_NAME=internship_mca
+   DB_USER=root
+   DB_PASSWORD=your_database_password
+   
+   EMAIL_HOST=smtp.gmail.com
+   EMAIL_PORT=587
+   EMAIL_USER=your_email@gmail.com
+   EMAIL_PASS=your_app_password
+   
+   PORT=3001
+   ```
 
-### Configure Razorpay
+2. **Client Configuration** (`client/.env`):
+   - Copy `client/.env.example` to `client/.env`
+   - Update the values with your actual credentials:
+   ```env
+   REACT_APP_API_URL=http://localhost:3001
+   REACT_APP_RAZORPAY_KEY=your_razorpay_key
+   REACT_APP_RAZORPAY_SECRET=your_razorpay_secret
+   ```
 
-Update Razorpay keys in `client/src/components/PayBillNext.js`:
-```javascript
-const options = {
-    key: "your_razorpay_key",
-    key_secret: "your_razorpay_secret",
-    // ...
-};
-```
+**Note**: 
+- For Gmail, you need to generate an App Password from your Google Account settings (not your regular password).
+- Get Razorpay keys from your Razorpay dashboard.
 
 ### Install Dependencies
 
@@ -296,4 +293,5 @@ For issues or questions, please contact the development team or create an issue 
 ---
 
 **Note**: This is a development project. For production use, ensure proper security measures, error handling, and testing are implemented.
+
 

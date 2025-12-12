@@ -12,29 +12,30 @@ const PayBillNext = () => {
         e.preventDefault();
 
         var options={
-          key:"rzp_test_aRwvKMa3LOdILg",
-          key_secret:"bceCS0Mx0iWwM9OafcFtFvu3",
+          key:process.env.REACT_APP_RAZORPAY_KEY,
+          key_secret:process.env.REACT_APP_RAZORPAY_SECRET,
           amount:price*100,
           currency:"INR",
           name:"Ecommerce",
           description:"Payment for your order",
           handler:function(response){
-            axios.post(`http://localhost:3001/paybillnext/${price}`,{
+            const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3001";
+            axios.post(`${apiUrl}/paybillnext/${price}`,{
               price:price,
               payment_id:response.razorpay_payment_id,
               uid:uid
              }).then((response)=>{
                alert("Payment successful")
-               window.location="http://localhost:3000/myorder"
+               window.location="/myorder"
              })
              .catch(error => {
                  alert("Payment failed. Please try again.")
              })
           },
           prefill:{
-            name:"sindhu BM",
-            email:"sindubm336@gmail.com",
-            contact:"9353510540",
+            name:"",
+            email:"",
+            contact:"",
           },
 
           notes:{
