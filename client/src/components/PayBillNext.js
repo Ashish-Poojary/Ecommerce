@@ -12,8 +12,8 @@ const PayBillNext = () => {
         e.preventDefault();
 
         var options={
-          key:process.env.REACT_APP_RAZORPAY_KEY,
-          key_secret:process.env.REACT_APP_RAZORPAY_SECRET,
+          key:process.env.REACT_APP_RAZORPAY_KEY || "rzp_test_aRwvKMa3LOdILg",
+          key_secret:process.env.REACT_APP_RAZORPAY_SECRET || "bceCS0Mx0iWwM9OafcFtFvu3",
           amount:price*100,
           currency:"INR",
           name:"Ecommerce",

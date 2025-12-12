@@ -444,13 +444,13 @@ app.post('/forgotpass',(req,res) => {
                 host: process.env.EMAIL_HOST || "smtp.gmail.com",
                 port: process.env.EMAIL_PORT || 587,
                 auth: {
-                  user: process.env.EMAIL_USER,
-                  pass: process.env.EMAIL_PASS,
+                  user: process.env.EMAIL_USER || "",
+                  pass: process.env.EMAIL_PASS || "",
                 },
               });
             
               transporter.sendMail({
-                from: `"Ecommerce" <${process.env.EMAIL_USER}>`,
+                from: `"Ecommerce" <${process.env.EMAIL_USER || ""}>`,
                 to: username,
                 subject: "ONE TIME PASSWORD",
                 text: "Your OTP:",

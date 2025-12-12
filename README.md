@@ -1,297 +1,116 @@
-# Ecommerce - Online Shopping Platform
+# Ecommerce Platform
 
-Ecommerce is a full-stack web-based online shopping platform that provides a complete e-commerce solution with user authentication, product management, shopping cart, payment integration, and admin dashboard.
+A full-stack e-commerce web application built with React and Node.js. Users can browse products, add items to cart, and make payments. Admins can manage products, categories, orders, and view customer feedback.
 
 ## Features
 
-### For Customers
-- **User Registration & Authentication**: Secure user registration and login system
-- **Product Browsing**: Browse products by category with search functionality
-- **Shopping Cart**: Add products to cart and manage orders
-- **Order Management**: View order history (pending and confirmed orders)
-- **Payment Integration**: Secure payment processing via Razorpay
-- **Profile Management**: Update user profile and view order details
-- **Password Recovery**: Forgot password functionality with OTP verification via email
+- User authentication (login/signup)
+- Product browsing and search
+- Shopping cart functionality
+- Razorpay payment integration
+- Order management
+- Admin dashboard with statistics
+- Product and category management
+- Customer feedback system
+- Password reset via OTP email
 
-### For Administrators
-- **Admin Dashboard**: Comprehensive dashboard with statistics (Total Users, Products, Orders, Revenue)
-- **Product Management**: Add, view, and delete products with image uploads
-- **Category Management**: Create and manage product categories
-- **Order Management**: View all customer orders with filtering options (All, Pending, Confirmed)
-- **User Management**: View registered users and their details
-- **Feedback Management**: View and manage customer feedback
-- **Customer Address Access**: View customer addresses for paid orders
+## Tech Stack
 
-## Technology Stack
+**Frontend:**
+- React.js
+- Bootstrap 5
+- Axios
+- React Router DOM
 
-### Frontend
-- **React.js** (v18.3.1) - UI framework
-- **React Router DOM** (v7.0.2) - Routing
-- **Bootstrap 5** (v5.3.3) - CSS framework
-- **Axios** (v1.7.9) - HTTP client
-
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** (v4.21.2) - Web framework
-- **MySQL** (v2.18.1) - Database
-- **Multer** (v1.4.5) - File upload handling
-- **Nodemailer** (v6.9.16) - Email service
-- **CORS** (v2.8.5) - Cross-origin resource sharing
-
-### Payment Gateway
-- **Razorpay** - Payment processing
+**Backend:**
+- Node.js
+- Express.js
+- MySQL
+- Multer (file uploads)
+- Nodemailer (email sending)
+- Razorpay (payments)
 
 ## Installation
 
-### Prerequisites
+1. Clone the repository
+```bash
+git clone https://github.com/your-username/Ecommerce.git
+cd Ecommerce
+```
 
-- **Node.js** (v14 or higher)
-- **MySQL** (v5.7 or higher)
-- **npm** or **yarn** package manager
-- **Git** (for cloning the repository)
+2. Install server dependencies
+```bash
+cd server
+npm install
+```
 
-### Setup Database
+3. Install client dependencies
+```bash
+cd ../client
+npm install
+```
 
-1. Create a MySQL database:
-   ```sql
-   CREATE DATABASE internship_mca;
-   ```
+## Configuration
 
-2. Import the database schema (create tables manually or use phpMyAdmin):
-   - `signup` - User registration data
-   - `login` - User authentication
-   - `products` - Product information
-   - `category` - Product categories
-   - `customer_orders` - Order details
-   - `payment` - Payment transactions
-   - `feedback` - Customer feedback
-   - `otp` - OTP verification
+1. Create a `.env` file in the `server` folder:
+```env
+PORT=3001
 
-### Configure Environment Variables
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=internship_mca
+DB_USER=root
+DB_PASSWORD=your_password
 
-**IMPORTANT**: Never commit `.env` files to version control. They contain sensitive credentials.
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
+```
 
-1. **Server Configuration** (`server/.env`):
-   - Copy `server/.env.example` to `server/.env`
-   - Update the values with your actual credentials:
-   ```env
-   DB_HOST=localhost
-   DB_PORT=3306
-   DB_NAME=internship_mca
-   DB_USER=root
-   DB_PASSWORD=your_database_password
-   
-   EMAIL_HOST=smtp.gmail.com
-   EMAIL_PORT=587
-   EMAIL_USER=your_email@gmail.com
-   EMAIL_PASS=your_app_password
-   
-   PORT=3001
-   ```
+2. Create a `.env` file in the `client` folder:
+```env
+REACT_APP_RAZORPAY_KEY=your_razorpay_key
+REACT_APP_RAZORPAY_SECRET=your_razorpay_secret
+REACT_APP_API_URL=http://localhost:3001
+```
 
-2. **Client Configuration** (`client/.env`):
-   - Copy `client/.env.example` to `client/.env`
-   - Update the values with your actual credentials:
-   ```env
-   REACT_APP_API_URL=http://localhost:3001
-   REACT_APP_RAZORPAY_KEY=your_razorpay_key
-   REACT_APP_RAZORPAY_SECRET=your_razorpay_secret
-   ```
+3. Set up MySQL database and import the schema from `database/customer_orders.sql`
 
-**Note**: 
-- For Gmail, you need to generate an App Password from your Google Account settings (not your regular password).
-- Get Razorpay keys from your Razorpay dashboard.
+## Running the Application
 
-### Install Dependencies
+1. Start the server:
+```bash
+cd server
+npm start
+```
 
-1. **Install Server Dependencies**:
-   ```bash
-   cd server
-   npm install
-   ```
+2. Start the client (in a new terminal):
+```bash
+cd client
+npm start
+```
 
-2. **Install Client Dependencies**:
-   ```bash
-   cd client
-   npm install
-   ```
-
-### Run the Application
-
-1. **Start the Server**:
-   ```bash
-   cd server
-   npm start
-   ```
-   Server will run on `http://localhost:3001`
-
-2. **Start the Client** (in a new terminal):
-   ```bash
-   cd client
-   npm start
-   ```
-   Client will run on `http://localhost:3000`
-
-3. **Access the Application**:
-   - Open your browser and navigate to `http://localhost:3000`
-   - The application will automatically open in your default browser
+The app will be available at `http://localhost:3000`
 
 ## Project Structure
 
 ```
 Ecommerce/
-├── client/                 # React frontend application
-│   ├── public/            # Static files
-│   │   ├── upload/        # Product images
-│   │   └── ...
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   │   ├── Layouts/   # Navbar, Footer
-│   │   │   ├── Adminhome.js
-│   │   │   ├── Category.js
-│   │   │   ├── Home.js
-│   │   │   ├── Login.js
-│   │   │   ├── MyCart.js
-│   │   │   ├── Orders.js
-│   │   │   ├── Product.js
-│   │   │   ├── Signup.js
-│   │   │   └── ...
-│   │   ├── images/        # Static images
-│   │   ├── App.js         # Main app component
-│   │   └── index.js       # Entry point
-│   ├── package.json
-│   └── ...
-├── server/                # Node.js backend
-│   ├── index.js          # Main server file
-│   ├── package.json
-│   └── ...
-├── database/             # Database files
-│   └── customer_orders.sql
-├── .gitignore
+├── client/          # React frontend
+├── server/          # Node.js backend
+├── database/        # SQL schema files
 └── README.md
 ```
 
-## API Endpoints
+## Default Credentials
 
-### Authentication
-- `POST /signup` - User registration
-- `POST /log_auth` - User login
-- `POST /forgotpass` - Send OTP for password reset
-- `POST /otp` - Verify OTP
-- `POST /resetpass` - Reset password
+- Admin: Use the admin account created in your database
+- Users: Register through the signup page
 
-### Products
-- `GET /productview` - Get all products
-- `POST /product` - Add new product (admin)
-- `DELETE /delproduct/:id` - Delete product (admin)
+## Notes
 
-### Categories
-- `GET /viewcategory` - Get all categories
-- `POST /category` - Add new category (admin)
-- `DELETE /delcategory/:id` - Delete category (admin)
-
-### Orders
-- `GET /mycart/:uid` - Get user orders
-- `POST /addcart/:id/:uid` - Add product to cart
-- `DELETE /deleteorder/:id` - Remove order from cart
-- `GET /orders` - Get all orders (admin)
-
-### Payment
-- `POST /paybillnext/:price` - Process payment
-
-### Admin
-- `GET /admin/stats` - Get dashboard statistics
-- `GET /user/name/:email` - Get user name by email
-- `GET /user/address/:email` - Get user address by email
-
-### Feedback
-- `GET /viewfeedback` - Get all feedback (admin)
-- `POST /feedback` - Submit feedback
-
-## Default User Types
-
-### Admin
-- Access admin dashboard
-- Manage products, categories, and orders
-- View all users and feedback
-
-### User
-- Browse and purchase products
-- Manage cart and orders
-- Submit feedback
-
-## Security Notes
-
-- **Never commit sensitive files** like database credentials or API keys to version control
-- **Use environment variables** for sensitive configuration (consider using `.env` files)
-- **Validate and sanitize** all user inputs
-- **Use strong passwords** for database and email accounts
-- **Keep dependencies updated** to avoid security vulnerabilities
-- **Implement proper authentication** and authorization checks
-- **Use HTTPS** in production environment
-
-## Features in Detail
-
-### Shopping Cart
-- Add multiple products to cart
-- View pending and confirmed orders
-- Calculate total only for pending orders
-- Remove pending orders before payment
-- Proceed to payment for pending orders
-
-### Payment Processing
-- Integrated with Razorpay payment gateway
-- Secure payment processing
-- Automatic order status update after successful payment
-- Payment confirmation via email
-
-### Admin Dashboard
-- Real-time statistics:
-  - Total Users
-  - Total Products
-  - Total Orders
-  - Total Revenue
-- Order management with filtering
-- User and product management
-
-## Development
-
-### Available Scripts
-
-**Client:**
-- `npm start` - Start development server
-- `npm build` - Build for production
-- `npm test` - Run tests
-
-**Server:**
-- `npm start` - Start server
-- `npm run devStart` - Start server with nodemon (auto-restart)
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is for educational/demonstration purposes.
-
-## Support
-
-For issues or questions, please contact the development team or create an issue in the repository.
-
-## Acknowledgments
-
-- Bootstrap for UI components
-- Razorpay for payment gateway integration
-- React team for the amazing framework
-- Node.js and Express.js communities
-
----
-
-**Note**: This is a development project. For production use, ensure proper security measures, error handling, and testing are implemented.
-
+- Make sure MySQL is running before starting the server
+- For email functionality, use Gmail App Password (not regular password)
+- Razorpay keys should be from your Razorpay test/live account
 
