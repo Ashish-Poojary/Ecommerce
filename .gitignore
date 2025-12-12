@@ -7,6 +7,9 @@
 client/.env
 server/.env
 
+# Database folder
+database/
+
 # Dependencies
 node_modules/
 client/node_modules/
